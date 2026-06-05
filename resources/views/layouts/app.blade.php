@@ -11,7 +11,6 @@
             --card-bg: #ffffff;
             --text-color: #212529;
             --navbar-bg: #198754;
-            --table-bg: #ffffff;
             --border-color: #dee2e6;
         }
         [data-theme="dark"] {
@@ -19,7 +18,6 @@
             --card-bg: #16213e;
             --text-color: #e0e0e0;
             --navbar-bg: #0f3460;
-            --table-bg: #16213e;
             --border-color: #444;
         }
         body {
@@ -34,7 +32,7 @@
             color: var(--text-color);
         }
         .table {
-            background-color: var(--table-bg);
+            background-color: var(--card-bg);
             color: var(--text-color);
             border-color: var(--border-color);
         }
@@ -47,7 +45,7 @@
             background-color: var(--card-bg);
             color: var(--text-color);
         }
-        #themeToggle { cursor: pointer; font-size: 1.2rem; }
+        #themeToggle { cursor: pointer; font-size: 1.3rem; }
     </style>
 </head>
 <body>
@@ -80,8 +78,6 @@
         localStorage.setItem('theme', next);
         document.getElementById('themeToggle').textContent = next === 'dark' ? '☀️' : '🌙';
     }
-
-    // Load saved theme
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
