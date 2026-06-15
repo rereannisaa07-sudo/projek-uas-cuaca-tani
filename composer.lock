@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "ad874bdf2dc08c4892f8a96cdea87203",
+=======
+    "content-hash": "8bd1704cb896b9d41de13aec24900d1f",
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
     "packages": [
         {
             "name": "brick/math",
@@ -643,6 +647,7 @@
         },
         {
             "name": "guzzlehttp/guzzle",
+<<<<<<< HEAD
             "version": "7.11.1",
             "source": {
                 "type": "git",
@@ -653,6 +658,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/guzzle/zipball/5af96f374e0ab4ebd747b8310888c99d3adb0a8c",
                 "reference": "5af96f374e0ab4ebd747b8310888c99d3adb0a8c",
+=======
+            "version": "7.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "c987f8ce84b8434fa430795eca0f3430663da72b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/c987f8ce84b8434fa430795eca0f3430663da72b",
+                "reference": "c987f8ce84b8434fa430795eca0f3430663da72b",
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
                 "shasum": ""
             },
             "require": {
@@ -671,7 +688,11 @@
                 "bamarni/composer-bin-plugin": "^1.8.2",
                 "ext-curl": "*",
                 "guzzle/client-integration-tests": "3.0.2",
+<<<<<<< HEAD
                 "guzzlehttp/test-server": "^0.5",
+=======
+                "guzzlehttp/test-server": "^0.4",
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
                 "php-http/message-factory": "^1.1",
                 "phpunit/phpunit": "^8.5.52 || ^9.6.34",
                 "psr/log": "^1.1 || ^2.0 || ^3.0"
@@ -751,7 +772,11 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/guzzle/guzzle/tree/7.11.1"
+=======
+                "source": "https://github.com/guzzle/guzzle/tree/7.11.0"
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
             },
             "funding": [
                 {
@@ -767,7 +792,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2026-06-07T22:54:06+00:00"
+=======
+            "time": "2026-06-02T12:40:51+00:00"
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
         },
         {
             "name": "guzzlehttp/promises",
@@ -1060,6 +1089,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v13.15.0",
             "source": {
                 "type": "git",
@@ -1070,6 +1100,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/7e23b2aa4e1133a43835c93a810b4bedc40e425b",
                 "reference": "7e23b2aa4e1133a43835c93a810b4bedc40e425b",
+=======
+            "version": "v13.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "1daa6d3b4defe46976ccfa4fb0a7ab62717712a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/1daa6d3b4defe46976ccfa4fb0a7ab62717712a2",
+                "reference": "1daa6d3b4defe46976ccfa4fb0a7ab62717712a2",
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
                 "shasum": ""
             },
             "require": {
@@ -1280,7 +1322,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< HEAD
             "time": "2026-06-09T13:45:51+00:00"
+=======
+            "time": "2026-06-02T14:28:17+00:00"
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
         },
         {
             "name": "laravel/prompts",
@@ -4632,6 +4678,7 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
+<<<<<<< HEAD
             "version": "v1.38.2",
             "source": {
                 "type": "git",
@@ -4642,6 +4689,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
                 "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
+=======
+            "version": "v1.38.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/14c5439eec4ccff081ac14eca2dc57feb2a66d92",
+                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92",
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
                 "shasum": ""
             },
             "require": {
@@ -4693,7 +4752,11 @@
                 "shim"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.2"
+=======
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.1"
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
             },
             "funding": [
                 {
@@ -4713,7 +4776,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2026-05-27T06:59:30+00:00"
+=======
+            "time": "2026-05-26T12:51:13+00:00"
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
         },
         {
             "name": "symfony/polyfill-php80",
@@ -6094,6 +6161,7 @@
         },
         {
             "name": "composer/pcre",
+<<<<<<< HEAD
             "version": "3.4.0",
             "source": {
                 "type": "git",
@@ -6104,12 +6172,25 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/composer/pcre/zipball/d5a341b3fb61f3001970940afb1d332968a183ed",
                 "reference": "d5a341b3fb61f3001970940afb1d332968a183ed",
+=======
+            "version": "3.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/pcre.git",
+                "reference": "b2bed4734f0cc156ee1fe9c0da2550420d99a21e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/pcre/zipball/b2bed4734f0cc156ee1fe9c0da2550420d99a21e",
+                "reference": "b2bed4734f0cc156ee1fe9c0da2550420d99a21e",
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0"
             },
             "conflict": {
+<<<<<<< HEAD
                 "phpstan/phpstan": "<2.2.2"
             },
             "require-dev": {
@@ -6117,6 +6198,14 @@
                 "phpstan/phpstan-deprecation-rules": "^2",
                 "phpstan/phpstan-strict-rules": "^2",
                 "phpunit/phpunit": "^9"
+=======
+                "phpstan/phpstan": "<1.11.10"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.12 || ^2",
+                "phpstan/phpstan-strict-rules": "^1 || ^2",
+                "phpunit/phpunit": "^8 || ^9"
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
             },
             "type": "library",
             "extra": {
@@ -6154,7 +6243,11 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/pcre/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/composer/pcre/tree/3.4.0"
+=======
+                "source": "https://github.com/composer/pcre/tree/3.3.2"
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
             },
             "funding": [
                 {
@@ -6164,9 +6257,19 @@
                 {
                     "url": "https://github.com/composer",
                     "type": "github"
+<<<<<<< HEAD
                 }
             ],
             "time": "2026-06-07T11:47:49+00:00"
+=======
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-11-12T16:29:46+00:00"
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
         },
         {
             "name": "composer/xdebug-handler",
@@ -6651,6 +6754,70 @@
             "time": "2026-04-29T18:32:34+00:00"
         },
         {
+<<<<<<< HEAD
+=======
+            "name": "laravel/breeze",
+            "version": "v2.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/breeze.git",
+                "reference": "4f20e7b2cc8d25daa85d8647241a89c8e0930305"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/4f20e7b2cc8d25daa85d8647241a89c8e0930305",
+                "reference": "4f20e7b2cc8d25daa85d8647241a89c8e0930305",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^11.0|^12.0|^13.0",
+                "illuminate/filesystem": "^11.0|^12.0|^13.0",
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "illuminate/validation": "^11.0|^12.0|^13.0",
+                "php": "^8.2.0",
+                "symfony/console": "^7.0|^8.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^11.0|^12.0|^13.0",
+                "orchestra/testbench-core": "^9.0|^10.0|^11.0",
+                "phpstan/phpstan": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Breeze\\BreezeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Breeze\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Minimal Laravel authentication scaffolding with Blade and Tailwind.",
+            "keywords": [
+                "auth",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/breeze/issues",
+                "source": "https://github.com/laravel/breeze"
+            },
+            "time": "2026-05-14T16:54:25+00:00"
+        },
+        {
+>>>>>>> d6df478244d0093f66786268ccc71cdc831aefa1
             "name": "laravel/pail",
             "version": "v1.2.7",
             "source": {
