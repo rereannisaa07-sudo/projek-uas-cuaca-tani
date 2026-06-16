@@ -55,6 +55,9 @@
         <div class="ms-auto d-flex gap-2 align-items-center">
             <a href="{{ route('lahan.index') }}" class="btn btn-outline-light btn-sm">🌱 Data Lahan</a>
             <a href="{{ route('cuaca.index') }}" class="btn btn-outline-light btn-sm">🌤️ Cek Cuaca</a>
+            @if(Auth::user()->isAdmin())
+                <a href="{{ route('admin.database') }}" class="btn btn-outline-light btn-sm">🗄️ Lihat Database</a>
+            @endif
             <span id="themeToggle" onclick="toggleTheme()" title="Ganti Tema">🌙</span>
             <span class="text-white">{{ Auth::user()->name }}</span>
             <form method="POST" action="{{ route('logout') }}" class="d-inline">
