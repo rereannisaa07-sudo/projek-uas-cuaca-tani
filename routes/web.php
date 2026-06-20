@@ -22,6 +22,14 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/database', [AdminController::class, 'database'])->name('admin.database');
+
+    Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+
+    Route::get('/admin/lahan/{lahan}/edit', [AdminController::class, 'editLahan'])->name('admin.lahan.edit');
+    Route::put('/admin/lahan/{lahan}', [AdminController::class, 'updateLahan'])->name('admin.lahan.update');
+    Route::delete('/admin/lahan/{lahan}', [AdminController::class, 'destroyLahan'])->name('admin.lahan.destroy');
 });
 
 require __DIR__.'/auth.php';
