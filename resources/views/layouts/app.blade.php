@@ -67,11 +67,9 @@
         </div>
     </div>
 </nav>
-
 <div class="container mt-4">
     @yield('content')
 </div>
-
 <script>
     function toggleTheme() {
         const html = document.documentElement;

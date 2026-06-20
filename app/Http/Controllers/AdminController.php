@@ -7,11 +7,11 @@ use App\Models\User;
 
 class AdminController extends Controller
 {
-    public function database()
-    {
-        $users = User::all();
-        $lahans = Lahan::with('user')->get();
+   public function database()
+{
+    $users = User::all();
+    $lahans = Lahan::with('user')->get();
 
-        return view('admin.database', compact('users', 'lahans'));
-    }
+    return view('admin.database', compact('users', 'lahans'));
+}
 }
