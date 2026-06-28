@@ -61,66 +61,184 @@ class CuacaController extends Controller
         }
 
         // Logika rekomendasi
-        $rekomendasi = $this->getRekomendasi($cuaca['weather'][0]['main'], $lahan->komoditas);
+        $rekomendasi = $this->getRekomendasi(
+            $cuaca['weather'][0]['main'],
+            $lahan->komoditas,
+            $cuaca['main']['temp'],
+            $cuaca['main']['humidity']
+        );
 
         return view('cuaca.hasil', compact('cuaca', 'forecastHarian', 'lahan', 'rekomendasi'));
     }
 
-    private function getRekomendasi($kondisiCuaca, $komoditas)
+    private function getRekomendasi($kondisiCuaca, $komoditas, $suhu, $kelembaban)
     {
         $kondisi = strtolower($kondisiCuaca);
+        $komoditas = strtolower($komoditas);
 
-        if (str_contains($kondisi, 'rain') || str_contains($kondisi, 'drizzle') || str_contains($kondisi, 'thunderstorm')) {
-            return [
-                'status' => 'warning',
-                'icon' => '🌧️',
-                'judul' => 'Cuaca Hujan - Tunda Pemupukan!',
-                'pesan' => 'Kondisi hujan saat ini tidak ideal untuk pemupukan. Tunda pemupukan hingga cuaca cerah agar pupuk tidak larut terbawa air hujan.',
-                'saran' => [
-                    'Tunda kegiatan pemupukan',
-                    'Pastikan drainase lahan berfungsi baik',
-                    'Periksa kondisi tanaman dari potensi banjir',
-                    'Siapkan plastik penutup untuk pupuk yang sudah ada',
-                ]
-            ];
-        } elseif (str_contains($kondisi, 'clear') || str_contains($kondisi, 'sunny')) {
-            return [
-                'status' => 'danger',
-                'icon' => '☀️',
-                'judul' => 'Cuaca Panas - Lakukan Penyiraman!',
-                'pesan' => 'Cuaca cerah dan panas. Segera lakukan penyiraman pada tanaman ' . $komoditas . ' agar tidak kekeringan.',
-                'saran' => [
-                    'Lakukan penyiraman pagi hari (06.00-08.00)',
-                    'Lakukan penyiraman sore hari (16.00-18.00)',
-                    'Waktu ideal untuk pemupukan setelah penyiraman',
-                    'Pantau kelembaban tanah secara berkala',
-                ]
-            ];
-        } elseif (str_contains($kondisi, 'cloud')) {
-            return [
-                'status' => 'success',
-                'icon' => '⛅',
-                'judul' => 'Cuaca Berawan - Kondisi Ideal!',
-                'pesan' => 'Cuaca berawan adalah kondisi terbaik untuk aktivitas pertanian ' . $komoditas . '.',
-                'saran' => [
-                    'Waktu ideal untuk pemupukan',
-                    'Cocok untuk penanaman bibit baru',
-                    'Lakukan pemangkasan tanaman',
-                    'Cek dan perbaiki irigasi lahan',
-                ]
-            ];
-        } else {
-            return [
-                'status' => 'info',
-                'icon' => '🌤️',
-                'judul' => 'Pantau Cuaca Secara Berkala',
-                'pesan' => 'Kondisi cuaca saat ini normal. Lanjutkan aktivitas pertanian seperti biasa.',
-                'saran' => [
-                    'Pantau perkembangan cuaca',
-                    'Lanjutkan jadwal tanam normal',
-                    'Periksa kondisi tanaman',
-                ]
-            ];
+        $hujan = str_contains($kondisi, 'rain') || str_contains($kondisi, 'drizzle') || str_contains($kondisi, 'thunderstorm');
+        $panas = str_contains($kondisi, 'clear') || str_contains($kondisi, 'sunny') || $suhu >= 32;
+        $berawan = str_contains($kondisi, 'cloud');
+
+        // === PADI ===
+        if ($komoditas === 'padi') {
+            if ($hujan) {
+                return [
+                    'status' => 'warning', 'icon' => '🌧️',
+                    'judul' => 'Cuaca Hujan - Tunda Pemupukan!',
+                    'pesan' => 'Hujan tidak ideal untuk pemupukan padi. Tunda hingga cuaca cerah agar pupuk tidak larut.',
+                    'saran' => [
+                        'Tunda kegiatan pemupukan',
+                        'Pastikan drainase sawah berfungsi baik',
+                        'Periksa ketinggian air di sawah',
+                        'Waspadai hama dan penyakit akibat kelembaban tinggi',
+                    ]
+                ];
+            } elseif ($panas) {
+                return [
+                    'status' => 'danger', 'icon' => '☀️',
+                    'judul' => 'Cuaca Panas - Jaga Ketinggian Air Sawah!',
+                    'pesan' => 'Suhu ' . $suhu . '°C terlalu panas untuk padi. Pastikan air sawah cukup agar tanaman tidak stres.',
+                    'saran' => [
+                        'Pastikan ketinggian air sawah 5-10 cm',
+                        'Hindari pemupukan saat terik (pupuk mudah menguap)',
+                        'Lakukan pemupukan pagi hari sebelum jam 09.00',
+                        'Pantau tanaman dari gejala daun menggulung',
+                    ]
+                ];
+            } else {
+                return [
+                    'status' => 'success', 'icon' => '⛅',
+                    'judul' => 'Cuaca Ideal untuk Padi!',
+                    'pesan' => 'Kondisi berawan sangat cocok untuk aktivitas perawatan padi.',
+                    'saran' => [
+                        'Waktu terbaik untuk pemupukan',
+                        'Cocok untuk penanaman bibit padi',
+                        'Lakukan penyiangan gulma',
+                        'Periksa kondisi irigasi sawah',
+                    ]
+                ];
+            }
+        }
+
+        // === JAGUNG ===
+        elseif ($komoditas === 'jagung') {
+            if ($hujan) {
+                return [
+                    'status' => 'warning', 'icon' => '🌧️',
+                    'judul' => 'Cuaca Hujan - Waspadai Busuk Akar!',
+                    'pesan' => 'Hujan deras bisa menyebabkan busuk akar pada jagung. Pastikan drainase lahan baik.',
+                    'saran' => [
+                        'Tunda pemupukan',
+                        'Periksa dan perbaiki saluran drainase',
+                        'Waspadai penyakit bulai akibat kelembaban tinggi',
+                        'Tunda penyemprotan pestisida',
+                    ]
+                ];
+            } elseif ($panas) {
+                return [
+                    'status' => 'danger', 'icon' => '☀️',
+                    'judul' => 'Cuaca Panas - Segera Siram Jagung!',
+                    'pesan' => 'Suhu ' . $suhu . '°C berbahaya untuk jagung, terutama saat fase berbunga. Segera lakukan penyiraman.',
+                    'saran' => [
+                        'Siram pagi (06.00-08.00) dan sore (16.00-18.00)',
+                        'Hindari penyiraman saat siang terik',
+                        'Tunda pemupukan hingga suhu turun',
+                        'Pantau tanaman dari gejala layu',
+                    ]
+                ];
+            } else {
+                return [
+                    'status' => 'success', 'icon' => '⛅',
+                    'judul' => 'Cuaca Ideal untuk Jagung!',
+                    'pesan' => 'Kondisi berawan sangat cocok untuk perawatan jagung.',
+                    'saran' => [
+                        'Waktu terbaik untuk pemupukan NPK',
+                        'Cocok untuk penanaman jagung baru',
+                        'Lakukan pembumbunan tanah',
+                        'Periksa hama penggerek batang',
+                    ]
+                ];
+            }
+        }
+
+        // === SAYURAN ===
+        elseif ($komoditas === 'sayuran') {
+            if ($hujan) {
+                return [
+                    'status' => 'warning', 'icon' => '🌧️',
+                    'judul' => 'Cuaca Hujan - Lindungi Sayuran!',
+                    'pesan' => 'Hujan lebat bisa merusak sayuran. Segera ambil tindakan perlindungan.',
+                    'saran' => [
+                        'Pasang naungan plastik jika memungkinkan',
+                        'Tunda pemupukan dan penyemprotan',
+                        'Periksa drainase bedengan',
+                        'Waspadai penyakit jamur pada daun',
+                    ]
+                ];
+            } elseif ($panas) {
+                return [
+                    'status' => 'danger', 'icon' => '☀️',
+                    'judul' => 'Cuaca Panas - Sayuran Butuh Air!',
+                    'pesan' => 'Suhu ' . $suhu . '°C terlalu panas untuk sayuran. Siram segera agar tidak layu.',
+                    'saran' => [
+                        'Siram 2x sehari pagi dan sore',
+                        'Pasang mulsa untuk menjaga kelembaban tanah',
+                        'Beri naungan pada sayuran daun',
+                        'Hindari pemupukan saat siang hari',
+                    ]
+                ];
+            } else {
+                return [
+                    'status' => 'success', 'icon' => '⛅',
+                    'judul' => 'Cuaca Ideal untuk Sayuran!',
+                    'pesan' => 'Kondisi berawan sangat baik untuk pertumbuhan sayuran.',
+                    'saran' => [
+                        'Waktu terbaik untuk pemupukan organik',
+                        'Cocok untuk pindah tanam bibit sayuran',
+                        'Lakukan penyiangan gulma',
+                        'Semprotkan pestisida organik jika perlu',
+                    ]
+                ];
+            }
+        }
+
+        // === LAINNYA ===
+        else {
+            if ($hujan) {
+                return [
+                    'status' => 'warning', 'icon' => '🌧️',
+                    'judul' => 'Cuaca Hujan - Tunda Pemupukan!',
+                    'pesan' => 'Kondisi hujan tidak ideal untuk pemupukan. Tunda hingga cuaca membaik.',
+                    'saran' => [
+                        'Tunda pemupukan',
+                        'Periksa drainase lahan',
+                        'Waspadai hama dan penyakit',
+                    ]
+                ];
+            } elseif ($panas) {
+                return [
+                    'status' => 'danger', 'icon' => '☀️',
+                    'judul' => 'Cuaca Panas - Lakukan Penyiraman!',
+                    'pesan' => 'Suhu ' . $suhu . '°C cukup panas. Segera siram tanaman agar tidak kekeringan.',
+                    'saran' => [
+                        'Siram pagi dan sore hari',
+                        'Tunda pemupukan saat terik',
+                        'Pantau kelembaban tanah',
+                    ]
+                ];
+            } else {
+                return [
+                    'status' => 'success', 'icon' => '⛅',
+                    'judul' => 'Cuaca Kondusif untuk Bertani!',
+                    'pesan' => 'Kondisi cuaca saat ini baik untuk aktivitas pertanian.',
+                    'saran' => [
+                        'Lanjutkan jadwal tanam normal',
+                        'Waktu baik untuk pemupukan',
+                        'Periksa kondisi tanaman',
+                    ]
+                ];
+            }
         }
     }
 }

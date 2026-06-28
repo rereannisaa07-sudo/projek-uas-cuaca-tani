@@ -22,18 +22,24 @@ class LahanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_lahan' => 'required|string|max:255',
-            'luas_lahan' => 'required|numeric',
-            'komoditas'  => 'required|in:padi,jagung,sayuran,lainnya',
-            'kota'       => 'required|string|max:255',
-            'alamat'     => 'nullable|string',
+            'nama_lahan'     => 'required|string|max:255',
+            'luas_lahan'     => 'required|numeric',
+            'komoditas'      => 'required|string|max:255',
+            'komoditas_lain' => 'nullable|string|max:255',
+            'kota'           => 'required|string|max:255',
+            'alamat'         => 'nullable|string',
         ]);
+
+        $komoditas = $request->komoditas;
+        if ($komoditas === 'lainnya' && $request->filled('komoditas_lain')) {
+            $komoditas = $request->komoditas_lain;
+        }
 
         Lahan::create([
             'user_id'    => Auth::id(),
             'nama_lahan' => $request->nama_lahan,
             'luas_lahan' => $request->luas_lahan,
-            'komoditas'  => $request->komoditas,
+            'komoditas'  => $komoditas,
             'kota'       => $request->kota,
             'alamat'     => $request->alamat,
         ]);
@@ -51,12 +57,12 @@ class LahanController extends Controller
         $request->validate([
             'nama_lahan' => 'required|string|max:255',
             'luas_lahan' => 'required|numeric',
-            'komoditas'  => 'required|in:padi,jagung,sayuran,lainnya',
+            'komoditas'  => 'required|string|max:255',
             'kota'       => 'required|string|max:255',
             'alamat'     => 'nullable|string',
         ]);
 
-        $lahan->update($request->all());
+        $lahan->update($request->only(['nama_lahan', 'luas_lahan', 'komoditas', 'kota', 'alamat']));
 
         return redirect()->route('lahan.index')->with('success', 'Lahan berhasil diupdate!');
     }

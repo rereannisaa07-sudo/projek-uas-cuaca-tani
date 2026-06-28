@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('nama_lahan');
             $table->decimal('luas_lahan', 8, 2);
-            $table->enum('komoditas', ['padi', 'jagung', 'sayuran', 'lainnya']);
+            $table->string('komoditas');
             $table->string('kota');
             $table->text('alamat')->nullable();
             $table->timestamps();
