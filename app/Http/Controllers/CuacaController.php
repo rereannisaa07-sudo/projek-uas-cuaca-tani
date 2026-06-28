@@ -23,7 +23,7 @@ class CuacaController extends Controller
 
         $lahan = Lahan::findOrFail($request->lahan_id);
         $apiKey = env('OPENWEATHER_API_KEY');
-        $kota = $lahan->kota;
+        $kota = $this->getNamaKotaAPI($lahan->kota);
 
         // Ambil cuaca current
         $cuacaResponse = Http::get("https://api.openweathermap.org/data/2.5/weather", [
@@ -69,6 +69,55 @@ class CuacaController extends Controller
         );
 
         return view('cuaca.hasil', compact('cuaca', 'forecastHarian', 'lahan', 'rekomendasi'));
+    }
+
+    private function getNamaKotaAPI($kota)
+    {
+        // Hapus prefix "Kab." atau "Kabupaten"
+        $kota = preg_replace('/^(Kab\.|Kabupaten)\s*/i', '', $kota);
+
+        // Mapping kota khusus yang tidak dikenali OpenWeatherMap
+        $mapping = [
+            'Jakarta Pusat'      => 'Jakarta',
+            'Jakarta Utara'      => 'Jakarta',
+            'Jakarta Barat'      => 'Jakarta',
+            'Jakarta Selatan'    => 'Jakarta',
+            'Jakarta Timur'      => 'Jakarta',
+            'Kepulauan Seribu'   => 'Jakarta',
+            'Tangerang Selatan'  => 'Tangerang',
+            'Depok'              => 'Depok',
+            'Bekasi'             => 'Bekasi',
+            'Bogor'              => 'Bogor',
+            'Bandung Barat'      => 'Bandung',
+            'Cimahi'             => 'Bandung',
+            'Surakarta'          => 'Solo',
+            'Pematangsiantar'    => 'Pematang Siantar',
+            'Bau-Bau'            => 'Baubau',
+            'Tidore Kepulauan'   => 'Tidore',
+            'Pangkajene dan Kepulauan' => 'Pangkajene',
+            'Tojo Una-Una'       => 'Ampana',
+            'Siau Tagulandang Biaro' => 'Siau',
+            'Hulu Sungai Selatan' => 'Kandangan',
+            'Hulu Sungai Tengah' => 'Barabai',
+            'Hulu Sungai Utara'  => 'Amuntai',
+            'Penajam Paser Utara' => 'Penajam',
+            'Kotawaringin Barat' => 'Pangkalan Bun',
+            'Kotawaringin Timur' => 'Sampit',
+            'Bolaang Mongondow'  => 'Kotamobagu',
+            'Kepulauan Aru'      => 'Dobo',
+            'Kepulauan Talaud'   => 'Melonguane',
+            'Kepulauan Sangihe'  => 'Tahuna',
+            'Maluku Tenggara Barat' => 'Saumlaki',
+            'Seram Bagian Barat' => 'Piru',
+            'Seram Bagian Timur' => 'Bula',
+            'Teluk Bintuni'      => 'Bintuni',
+            'Teluk Wondama'      => 'Wasior',
+            'Pegunungan Arfak'   => 'Manokwari',
+            'Mamberamo Raya'     => 'Burmeso',
+            'Boven Digoel'       => 'Tanah Merah',
+        ];
+
+        return $mapping[$kota] ?? $kota;
     }
 
     private function getRekomendasi($kondisiCuaca, $komoditas, $suhu, $kelembaban)
